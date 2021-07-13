@@ -48,6 +48,12 @@ while True:
             last[0] = current[0]
             last[1] = current[1]
 
+            # Left click
+            if (result[0].landmark[5].x <= result[0].landmark[4].x <= result[0].landmark[17].x or result[0].landmark[17].x <= result[0].landmark[4].x <= result[0].landmark[5].x):
+                autopy.mouse.toggle(down = True)
+            else:
+                autopy.mouse.toggle(down = False)
+
             # Draw result
             draw.draw_landmarks(image, result[0], handSol.HAND_CONNECTIONS)
 
