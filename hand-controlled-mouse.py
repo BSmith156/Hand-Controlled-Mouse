@@ -38,16 +38,27 @@ while True:
 
         if result:
             # Move mouse
-            landmark = result[0].landmark[0]
-            current[0] = last[0] + (screenSize[0] * pctBetweenPoints(landmark.x, captureBound[0], captureBound[1]) - last[0]) * smoothing
-            current[1] = last[1] + (screenSize[1] * pctBetweenPoints(landmark.y, captureBound[0], captureBound[1]) - last[1]) * smoothing
-            try:
-                autopy.mouse.move(current[0], current[1])
-            except ValueError:
-                pass
+            landmarkX = 0
+            landmarkY = 0
+            for i in [0, 1, 5, 9, 13, 17]:
+                landmarkX += result[0].landmark[i].x
+                landmarkY += result[0].landmark[i].y
+            landmarkX /= 6
+            landmarkY /= 6
+            current[0] = last[0] + (screenSize[0] * pctBetweenPoints(landmarkX, captureBound[0], captureBound[1]) - last[0]) * smoothing
+            if current[0] < 0:
+                current[0] = 0
+            elif current[0] >= screenSize[0]:
+                current[0] = screenSize[0] - 1
             last[0] = current[0]
+            current[1] = last[1] + (screenSize[1] * pctBetweenPoints(landmarkY, captureBound[0], captureBound[1]) - last[1]) * smoothing
+            if current[1] < 0:
+                current[1] = 0
+            elif current[1] >= screenSize[1]:
+                current[1] = screenSize[1] - 1
             last[1] = current[1]
-
+            autopy.mouse.move(current[0], current[1])
+           
             # Left click
             if (result[0].landmark[5].x <= result[0].landmark[4].x <= result[0].landmark[17].x or result[0].landmark[17].x <= result[0].landmark[4].x <= result[0].landmark[5].x):
                 autopy.mouse.toggle(down = True)
