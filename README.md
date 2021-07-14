@@ -1,7 +1,7 @@
 # Hand-Controlled Mouse
 Control your mouse using your hand and a webcam.
 
-<img src="https://imgur.com/a/1WtHH1q" width="auto" height="auto">
+<img src="https://github.com/BSmith156/Hand-Controlled-Mouse/blob/master/example.gif" width="100%" height="auto">
 
 ## Setup
 ### 1. Clone Repo
