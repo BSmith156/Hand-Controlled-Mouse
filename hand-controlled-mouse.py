@@ -40,11 +40,11 @@ while True:
             # Move mouse
             landmarkX = 0
             landmarkY = 0
-            for i in [0, 1, 5, 9, 13, 17]:
+            for i in [0, 5, 9, 13, 17]:
                 landmarkX += result[0].landmark[i].x
                 landmarkY += result[0].landmark[i].y
-            landmarkX /= 6
-            landmarkY /= 6
+            landmarkX /= 5
+            landmarkY /= 5
             current[0] = last[0] + (screenSize[0] * pctBetweenPoints(landmarkX, captureBound[0], captureBound[1]) - last[0]) * smoothing
             if current[0] < 0:
                 current[0] = 0
