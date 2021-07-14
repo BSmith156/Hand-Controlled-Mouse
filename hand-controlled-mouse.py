@@ -62,11 +62,14 @@ while True:
             # Left click
             if (result[0].landmark[5].x <= result[0].landmark[4].x <= result[0].landmark[17].x or result[0].landmark[17].x <= result[0].landmark[4].x <= result[0].landmark[5].x):
                 autopy.mouse.toggle(down = True)
+                cv2.line(image, (int(landmarkX * camSize[0]), int(landmarkY * camSize[1])), (int(result[0].landmark[4].x * camSize[0]), int(result[0].landmark[4].y * camSize[1])), (0, 0, 255), 2)
             else:
                 autopy.mouse.toggle(down = False)
 
             # Draw result
-            draw.draw_landmarks(image, result[0], handSol.HAND_CONNECTIONS)
+            draw.draw_landmarks(image, result[0], handSol.HAND_CONNECTIONS, draw.DrawingSpec(circle_radius=0))
+            cv2.circle(image, (int(landmarkX * camSize[0]), int(landmarkY * camSize[1])), 5, (0, 0, 255), -1)
+            cv2.circle(image, (int(result[0].landmark[4].x * camSize[0]), int(result[0].landmark[4].y * camSize[1])), 5, (0, 0, 255), -1)
 
         # Display
         cv2.rectangle(image, (captureRect[0], captureRect[1]), (captureRect[2], captureRect[3]), (255, 0, 0), 2)
