@@ -1,6 +1,11 @@
 import autopy
 from cv2 import cv2
 import mediapipe as mp
+import PIL.Image, PIL.ImageTk
+import tkinter as tk
+
+window = tk.Tk()
+window.title("Hand-Controlled Mouse")
 
 webcam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 flip = True
@@ -11,6 +16,9 @@ last = [0, 0]
 
 screenSize = autopy.screen.size()
 camSize = (webcam.get(cv2.CAP_PROP_FRAME_WIDTH), webcam.get(cv2.CAP_PROP_FRAME_HEIGHT))
+window.geometry(f"{int(camSize[0])}x{int(camSize[1])}")
+canvas = tk.Canvas(window, width = int(camSize[0]), height = int(camSize[1]))
+canvas.pack()
 
 captureArea = 0.5
 captureBound = ((1 - captureArea) / 2, 1 - ((1 - captureArea) / 2))
@@ -25,6 +33,12 @@ hand = handSol.Hands(max_num_hands = 1)
 draw = mp.solutions.drawing_utils
 
 while True:
+    try:
+        if not window.winfo_exists():
+            break
+    except tk.TclError:
+        break
+
     success, image = webcam.read()
 
     if flip:
@@ -73,5 +87,8 @@ while True:
 
         # Display
         cv2.rectangle(image, (captureRect[0], captureRect[1]), (captureRect[2], captureRect[3]), (255, 0, 0), 2)
-        cv2.imshow("Hand-Controlled Mouse", image)
-        cv2.waitKey(1)
+        tkImg = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)))
+        canvas.create_image(0, 0, image = tkImg, anchor = tk.NW)
+        window.update_idletasks()
+        window.update()
+        

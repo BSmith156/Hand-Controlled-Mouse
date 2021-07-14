@@ -1,3 +1,4 @@
 autopy
 mediapipe
 opencv-python
+Pillow
