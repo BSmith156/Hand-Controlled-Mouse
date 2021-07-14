@@ -11,7 +11,7 @@ Control your mouse using your hand and a webcam.
 `pip install -r requirements.txt`
 
 ## Usage
-`hand-controlled-mouse.py`
+`hand_controlled_mouse.py`
 
 ## Authors
 * [Ben Smith](https://github.com/BSmith156)
