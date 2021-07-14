@@ -13,5 +13,8 @@ Control your mouse using your hand and a webcam.
 ## Usage
 `hand_controlled_mouse.py`
 
-## Authors
-* [Ben Smith](https://github.com/BSmith156)
+### Mouse Movement
+To control the cursor simply move your hand within the blue capture square.
+
+### Clicking
+To hold left click move your thumb towards your palm. To release left click move your thumb away again.
