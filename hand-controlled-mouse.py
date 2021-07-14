@@ -84,8 +84,6 @@ while True:
             draw.draw_landmarks(image, result[0], handSol.HAND_CONNECTIONS, draw.DrawingSpec(circle_radius=0))
             cv2.circle(image, (int(landmarkX * camSize[0]), int(landmarkY * camSize[1])), 5, (0, 0, 255), -1)
             cv2.circle(image, (int(result[0].landmark[4].x * camSize[0]), int(result[0].landmark[4].y * camSize[1])), 5, (0, 0, 255), -1)
-        else:
-            autopy.mouse.toggle(down = False)
 
         # Display
         cv2.rectangle(image, (captureRect[0], captureRect[1]), (captureRect[2], captureRect[3]), (255, 0, 0), 2)
